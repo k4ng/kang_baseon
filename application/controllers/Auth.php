@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         		)
         	) );
 
-        	$data["footer"] = $this->render_html('footers', array(
+        	$data["footer"] = $this->render_html('footer', array(
         		'js' => array(
         			'js/jquery.min.js',
 			        'js/bootstrap.min.js',

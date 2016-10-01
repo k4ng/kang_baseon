@@ -20,7 +20,5 @@
 				});
 			</script>
 		";
-		
-		echo $swal;
 		return $swal;
 	}

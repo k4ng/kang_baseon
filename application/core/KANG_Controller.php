@@ -91,7 +91,7 @@
 					        {
 						        $jiid = 0;
 						        while($jiid < $param_jsi) {
-						        	$jsi_loop .= $param["js"][$jiid];
+						        	$jsi_loop .= $param["jsi"][$jiid];
 						        	$jiid++;
 						        }
 						        $tags .= $script_start;
@@ -141,7 +141,7 @@
 				        {
 					        $jiid = 0;
 					        while($jiid < $param_jsi) {
-					        	$jsi_loop .= $param["js"][$jiid];
+					        	$jsi_loop .= $param["jsi"][$jiid];
 					        	$jiid++;
 					        }
 					        $tags .= $script_start;
