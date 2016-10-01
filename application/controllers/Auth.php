@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         public function index()
         {
-        	$data["header"] = $this->render_html('jhjg', array(
+        	$data["header"] = $this->render_html('header', array(
         		'title' => 'Dashboard',
         		'css' => array(
         			'css/bootstrap.min.css',
@@ -24,6 +24,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         			'js/modernizr.min.js' 
         		)
         	) );
+
+        	$data["footer"] = $this->render_html('footers', array(
+        		'js' => array(
+        			'js/jquery.min.js',
+			        'js/bootstrap.min.js',
+			        'js/detect.js',
+			        'js/fastclick.js',
+			        'js/jquery.slimscroll.js',
+			        'js/jquery.blockUI.js',
+			        'js/waves.js',
+			        'js/wow.min.js',
+			        'js/jquery.nicescroll.js',
+			        'js/jquery.scrollTo.min.js',
+			        'plugins/bootstrap-sweetalert/sweet-alert.min.js',
+			        'js/jquery.core.js',
+			        'js/jquery.app.js'
+			    ),
+			    'jsi' => array(
+		            swal(array(
+		                'title'=>'Good job!', 
+		                'notif' => 'You clicked the button!', 
+		                'tipe' => 'error'
+		            ))
+		        )
+        	));
 			$this->load->view('auth/page-login', $data);
         }
 

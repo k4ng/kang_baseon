@@ -100,8 +100,9 @@ defined('PASSET_BACK')	OR define('PASSET_BACK', 'assets/admin');
 defined('PASSET_FRONT')	OR define('PASSET_FRONT', 'assets/admin');
 
 defined('CREATED_BY')	OR define('CREATED_BY', 'Kang Cahya');
-defined('CORE_NAME')	OR define('CORE_NAME', 'kangBaseOn');
-defined('LIB_NAME')	OR define('LIB_NAME', 'Kang Cahya');
+defined('APP_NAME')	OR define('APP_NAME', 'kang_BaseOn');
+defined('APP_VERSION')	OR define('APP_VERSION', '0.1');
+defined('APP_RELEASE')	OR define('APP_RELEASE', '-');
 
 
 

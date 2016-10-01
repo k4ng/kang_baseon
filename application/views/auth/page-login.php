@@ -62,33 +62,4 @@
             
         </div>
         <!-- end wrapper page -->
-        
-        
-
-        <!-- jQuery  -->
-        <script src="<?php kbase('js/jquery.min.js');?>"></script>
-        <script src="<?php kbase('js/bootstrap.min.js');?>"></script>
-        <script src="<?php kbase('js/detect.js');?>"></script>
-        <script src="<?php kbase('js/fastclick.js');?>"></script>
-        <script src="<?php kbase('js/jquery.slimscroll.js');?>"></script>
-        <script src="<?php kbase('js/jquery.blockUI.js');?>"></script>
-        <script src="<?php kbase('js/waves.js');?>"></script>
-        <script src="<?php kbase('js/wow.min.js');?>"></script>
-        <script src="<?php kbase('js/jquery.nicescroll.js');?>"></script>
-        <script src="<?php kbase('js/jquery.scrollTo.min.js');?>"></script>
-
-        <script src="<?php kbase('plugins/bootstrap-sweetalert/sweet-alert.min.js');?>"></script>
-        <!-- App js -->
-        <script src="<?php kbase('js/jquery.core.js');?>"></script>
-        <script src="<?php kbase('js/jquery.app.js');?>"></script>
-
-        <?php 
-            swal(array(
-                'title'=>'Good job!', 
-                'notif' => 'You clicked the button!', 
-                'tipe' => 'error'
-            ));
-        ?>
-	
-	</body>
-</html>
+<?=$footer;?>
