@@ -103,7 +103,7 @@ $autoload['helper'] = array('cookie', 'language','url','file','html','kang','kau
 | config files.  Otherwise, leave it blank.
 |
 */
-$autoload['config'] = array();
+$autoload['config'] = array("kang_baseon");
 
 /*
 | -------------------------------------------------------------------

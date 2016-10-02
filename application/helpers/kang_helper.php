@@ -21,11 +21,11 @@
 	 * @param  Simpel base url
 	 * @return path
 	 */
-	function kbase($file = null, $part = "back")
+	function kbase($file = null, $display = "back")
 	{
 		if($file != null)
 		{
-			if(trim($part) == "back")
+			if(trim($display) == "back")
 			{
 				$path = base_url("assets/admin/".$file);
 			}

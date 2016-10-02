@@ -12,8 +12,10 @@
 		 * @param  array  $param   berisi parameter seperti meta tag, title, author name, css, js dan lainnya
 		 * @return [type]          nilai kembali berupa string untuk header atau footer
 		 */
-		function render_html($element = 'no_part', $param = array() )
+		function render_html($element = 'no_part', $param = array(), $display = "back" )
 		{
+			$asset_path = ($display == 'back' ? base_url("assets/admin") : base_url("assets/front") );
+
 			$element_check = (is_string($element) ? $element : 'no_part');
 
 			$title = (isset($param['title'])) ? (!empty($param['title'])) ? $param['title'] : 'Title null' : 'Title not found';
@@ -39,6 +41,23 @@
 	        $script_start = ($param_jsi != 0 ? "<script>" : "");
 	        $script_end = ($param_jsi != 0 ? "</script>" : "");
 
+	        $assets_default = $this->config->item("assets_default");
+	        $ad_header_js = $assets_default["header"]["js"];
+	        $ad_header_css = $assets_default["header"]["css"];
+	        $ad_header_jsi = $assets_default["header"]["jsi"];
+	        $ad_header_cssi = $assets_default["header"]["cssi"];
+
+	        $ad_footer_js = $assets_default["footer"]["js"];
+	        $ad_footer_css = $assets_default["footer"]["css"];
+	        $ad_footer_jsi = $assets_default["footer"]["jsi"];
+	        $ad_footer_cssi = $assets_default["footer"]["cssi"];
+
+	        $ad_css_loop = '';
+			$ad_js_loop = '';
+
+			$ad_cssi_loop = '';
+			$ad_jsi_loop = '';
+
 			switch ($element_check) {
 			    case "header":
 					$tags .= '<!DOCTYPE html>';
@@ -55,15 +74,55 @@
 					        $tags .= '<!-- App title -->';
 					        $tags .= '<title>'.$title.'</title>';
 
+					        /**
+					         * START ASSETS DEFAULT : CSS v
+					         */
+					        if(isset($ad_header_css))
+					        {
+					        	if(count($ad_header_css) != 0)
+					        	{
+					        		$ad_cid = 0;
+					        		while ($ad_cid < count($ad_header_css)) {
+					        			$ad_css_loop .= '<link href="'.$asset_path.'/'.$ad_header_css[$ad_cid].'?v=14154930'.$ad_cid.'" rel="stylesheet" type="text/css">';
+						        		$ad_cid++;
+					        		}
+					        		$tags .= $ad_css_loop;
+					        	}
+					        }
+					        /**
+					         * END ASSETS DEFAULT : CSS ^
+					        */
+
 					        if($param_css != 0)
 					        {
 						        $cid = 0;
 						        while($cid < $param_css) {
-						        	$css_loop .= '<link href="'.PASSET_BACK.'/'.$param["css"][$cid].'?v=0000'.$cid.'" rel="stylesheet" type="text/css">';
+						        	$css_loop .= '<link href="'.$asset_path.'/'.$param["css"][$cid].'?v=14154930'.$cid.'" rel="stylesheet" type="text/css">';
 						        	$cid++;
 						        }
 						        $tags .= $css_loop;
 						    }
+
+						    /**
+					         * START ASSETS DEFAULT : CSSI (include) v
+					         */
+					        if(isset($ad_header_cssi))
+					        {
+					        	if(count($ad_header_cssi) != 0)
+					        	{
+					        		$ad_ciid = 0;
+							        while($ciid < count($ad_header_cssi)) {
+							        	$ad_cssi_loop .= $ad_header_cssi[$ad_ciid];
+							        	$ad_ciid++;
+							        }
+							        $tags .= $style_start;
+							        $tags .= $ad_cssi_loop;
+							        $tags .= $style_end;
+					        	}
+					        }
+					        /**
+					         * END ASSETS DEFAULT : CSSI ^
+					        */
 
 						    if($param_cssi != 0)
 					        {
@@ -77,15 +136,56 @@
 						        $tags .= $style_end;
 						    }
 
+
+						    /**
+					         * START ASSETS DEFAULT : JS v
+					         */
+					        if(isset($ad_header_js))
+					        {
+					        	if(count($ad_header_js) != 0)
+					        	{
+					        		$ad_jid = 0;
+					        		while ($ad_jid < count($ad_header_js)) {
+					        			$ad_js_loop .= '<script src="'.$asset_path.'/'.$ad_header_js[$ad_jid].'?v=14154930'.$ad_jid.'"></script>';
+						        		$ad_jid++;
+					        		}
+					        		$tags .= $ad_js_loop;
+					        	}
+					        }
+					        /**
+					         * END ASSETS DEFAULT : JS ^
+					        */
+					       
 						    if($param_js != 0)
 					        {
 						        $jid = 0;
 						        while($jid < $param_js) {
-						        	$js_loop .= '<script src="'.PASSET_BACK.'/'.$param["js"][$jid].'"></script>';
+						        	$js_loop .= '<script src="'.$asset_path.'/'.$param["js"][$jid].'?v=14154930'.$jid.'"></script>';
 						        	$jid++;
 						        }
 						        $tags .= $js_loop;
 						    }
+
+						     /**
+					         * START ASSETS DEFAULT : JSI (include) v
+					         */
+					        if(isset($ad_header_jsi))
+					        {
+					        	if(count($ad_header_jsi) != 0)
+					        	{
+					        		$ad_jiid = 0;
+							        while($ad_jiid < count($ad_header_jsi)) {
+							        	$ad_jsi_loop .= $ad_header_jsi[$ad_jiid];
+							        	$ad_jiid++;
+							        }
+							        $tags .= $script_start;
+							        $tags .= $ad_jsi_loop;
+							        $tags .= $script_end;
+					        	}
+					        }
+					        /**
+					         * END ASSETS DEFAULT : JSI ^
+					        */
 
 						    if($param_jsi != 0)
 					        {
@@ -100,16 +200,97 @@
 						    }
 
 					    $tags .= '</head>';
+					    $tags .= '<body>';
 
 					return $tags;
 
 			        break;
 			    case "footer":
+			    		/**
+				         * START ASSETS DEFAULT : CSS v
+				         */
+				        if(isset($ad_footer_css))
+				        {
+				        	if(count($ad_footer_css) != 0)
+				        	{
+				        		$ad_cid = 0;
+				        		while ($ad_cid < count($ad_footer_css)) {
+				        			$ad_css_loop .= '<link href="'.$asset_path.'/'.$ad_footer_css[$ad_cid].'?v=14154930'.$ad_cid.'" rel="stylesheet" type="text/css">';
+					        		$ad_cid++;
+				        		}
+				        		$tags .= $ad_css_loop;
+				        	}
+				        }
+				        /**
+				         * END ASSETS DEFAULT : CSS ^
+				        */
+				       
+				       /**
+				         * START ASSETS DEFAULT : CSSI (include) v
+				         */
+				        if(isset($ad_footer_cssi))
+				        {
+				        	if(count($ad_footer_cssi) != 0)
+				        	{
+				        		$ad_ciid = 0;
+						        while($ciid < count($ad_footer_cssi)) {
+						        	$ad_cssi_loop .= $ad_footer_cssi[$ad_ciid];
+						        	$ad_ciid++;
+						        }
+						        $tags .= $style_start;
+						        $tags .= $ad_cssi_loop;
+						        $tags .= $style_end;
+				        	}
+				        }
+				        /**
+				         * END ASSETS DEFAULT : CSSI ^
+				        */
+				       
+				       /**
+				         * START ASSETS DEFAULT : JS v
+				         */
+				        if(isset($ad_footer_js))
+				        {
+				        	if(count($ad_footer_js) != 0)
+				        	{
+				        		$ad_jid = 0;
+				        		while ($ad_jid < count($ad_footer_js)) {
+				        			$ad_js_loop .= '<script src="'.$asset_path.'/'.$ad_footer_js[$ad_jid].'?v=14154930'.$ad_jid.'"></script>';
+					        		$ad_jid++;
+				        		}
+				        		$tags .= $ad_js_loop;
+				        	}
+				        }
+				        /**
+				         * END ASSETS DEFAULT : JS ^
+				        */
+				       
+				       	/**
+				         * START ASSETS DEFAULT : JSI (include) v
+				         */
+				        if(isset($ad_footer_jsi))
+				        {
+				        	if(count($ad_footer_jsi) != 0)
+				        	{
+				        		$ad_jiid = 0;
+						        while($ad_jiid < count($ad_footer_jsi)) {
+						        	$ad_jsi_loop .= $ad_footer_jsi[$ad_jiid];
+						        	$ad_jiid++;
+						        }
+						        $tags .= $script_start;
+						        $tags .= $ad_jsi_loop;
+						        $tags .= $script_end;
+				        	}
+				        }
+				        /**
+				         * END ASSETS DEFAULT : JSI ^
+				        */
+					       
 				        if($param_css != 0)
 				        {
 					        $cid = 0;
 					        while($cid < $param_css) {
-					        	$css_loop .= '<link href="'.PASSET_BACK.'/'.$param["css"][$cid].'?v=0000'.$cid.'" rel="stylesheet" type="text/css">';
+					        	$css_loop .= '<link href="'.$asset_path.'/'.$param["css"][$cid].'?v=14154930'.$cid.'" rel="stylesheet" type="text/css">';
 					        	$cid++;
 					        }
 					        $tags .= $css_loop;
@@ -131,7 +312,7 @@
 				        {
 					        $jid = 0;
 					        while($jid < $param_js) {
-					        	$js_loop .= '<script src="'.PASSET_BACK.'/'.$param["js"][$jid].'"></script>';
+					        	$js_loop .= '<script src="'.$asset_path.'/'.$param["js"][$jid].'?v=14154930'.$jid.'"></script>';
 					        	$jid++;
 					        }
 					        $tags .= $js_loop;
@@ -192,9 +373,14 @@
 			return $data;
 		}
 
-		function array_merge( $param = array() )
+		function component()
 		{
-			$merge = array_merge($this->page_header(), $param);
+			$data['menu'] = $this->load->view("component/menu");
+		}
+
+		function merge( $param = array() )
+		{
+			$merge = array_merge($this->component(), $param);
 			return $merge;
 		}
 

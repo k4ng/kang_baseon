@@ -3,14 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     class Auth extends KANG_Controller {
 
-        public function __construct() {
+        public function __construct() 
+        {
             parent::__construct();
         }
 
         public function index()
         {
         	$data["header"] = $this->render_html('header', array(
-        		'title' => 'Dashboard',
+        		'title' => 'Login Page',
         		'css' => array(
         			'css/bootstrap.min.css',
         			'css/core.css',
@@ -59,38 +60,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         	$this->kauth->check_login( array(
         		"access" 		=> $post["access"],
         		"password" 		=> $post["password"],
-        		"redirect100" 	=> "auth",
+        		"redirect100" 	=> "main/dashboard",
         		"redirect404" 	=> "auth"
 	        ) );
         }
-
-		// public function prosess(){
-		// 	$email = $this->input->post("email");
-		// 	$password = $this->input->post("pass");
-			
-		// 	if($this->doc_auth_lib->check_login($email, $password) == 100)
-		// 	{
-		// 		record_log_access("login", $email, $password);
-		// 		$this->session->set_flashdata("login", lang("notif_login"));
-		// 		redirect("doc-dashboard/index");
-		// 	}
-		// 	else if($this->doc_auth_lib->check_login($email, $password) == 403)
-		// 	{
-		// 		record_log_access("hack", $email, $password);
-		// 		$this->session->set_flashdata("hack", lang("notif_hack"));
-		// 		redirect("auth");
-		// 	}
-		// 	else if($this->doc_auth_lib->check_login($email, $password) == 404)
-		// 	{
-		// 		record_log_access("failed_in", $email, $password);
-		// 		$this->session->set_flashdata("failed_in", lang("notif_failed_in"));
-		// 		redirect("auth");
-		// 	}
-		// 	else
-		// 	{
-		// 		record_log_access("failed_in", $email, $password);
-		// 		$this->session->set_flashdata("failed_in", lang("notif_failed_in"));
-		// 		redirect("auth");
-		// 	}
-		// }
     }
