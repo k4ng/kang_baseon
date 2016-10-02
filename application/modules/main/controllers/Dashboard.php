@@ -22,18 +22,18 @@ class Dashboard extends KANG_controller {
 
 	function test_vue(){
 		$data["header"] = $this->render_html('header', array(
-					'title' => 'Dashboard',
-					'js' => array(
-						'corejs/vue/vue.js'
-					)
-				) );
+			'title' => 'Dashboard',
+			'js' => array(
+				'corejs/vue/vue.js'
+			)
+		) );
 
-				$data["footer"] = $this->render_html('footer', array(
-					'js' => array(
-						'modules/main/test_vue.js'
-					)
-				) );
+		$data["footer"] = $this->render_html('footer', array(
+			'js' => array(
+				'modules/main/test_vue.js'
+			)
+		) );
 
-				$this->load->view('test_vue', $data);
-			}
+		$this->load->view('test_vue', $data);
+	}
 }
