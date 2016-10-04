@@ -1,6 +1,52 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/*
+*************************************************************
+* CONFIG kang_baseon
+*
+* Author 	: Cahya Dy
+* Blog 		: www.kang-cahya.com
+* 
+*************************************************************
+ */
+
+
+
+/*
+**************************************
+* SITE INFO DAN META
+**************************************
+* 
+ */
+
+$config["site_info"] = array(
+	"title"			=> "No title",
+	"description"	=> "No description"
+);
+
+$config["meta"] = array(
+	"author"	=> "No author",
+	"keywords"	=> "No keyword",
+	"extends"	=> array(
+		"<meta content='' name=''>",
+		"<meta content='' name=''>"
+	)
+);
+
+
+/*
+**************************************
+* JS Framework
+**************************************
+* Vue 2.1
+* 
+ */
+
+$config['js_framework'] = array(
+	"vue" 		=> TRUE
+);
+
 
 /*
 **************************************
