@@ -1,5 +1,5 @@
 # kang_baseon
-Core for codeigniter
+I call this core for codeigniter
 
 ## Status
 On Progress
