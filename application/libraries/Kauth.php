@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 	/*
-	* Library auth DOC CMS
+	* Library auth KANG BASEON
 	* Author : Cahya Dyazin
 	*
 	* 404 : not found (data tidak ada)
@@ -97,12 +97,14 @@
 			$CI->load->model("kauth_model","kmod");
 
 			$access_s = $param["access"];
+			$hash_s = kang_hash(rand(111111111111, 999999999999)."$access_s");
 
-			$create = $CI->kmod->create_account($access_s);
-			print_r($create);
+			$create = $CI->kmod->create_account($access_s, $hash_s);
+			
 			if($create == TRUE)
 			{
-				$data['fake'] = '';
+				$data['register'] = $CI->config->item('mail_content')['register'];
+				$data['hash'] = $hash_s;
 				$CI->load->library('kmail');
 				$CI->kmail->smtp_basic(array(
 					"to"		=> $access_s,
@@ -116,7 +118,7 @@
 			else
 			{
 				$CI->session->set_flashdata('fail', $access_s);
-				$CI->session->set_flashdata('fail_m', "Username dan katasandi tidak cocok!");
+				$CI->session->set_flashdata('fail_m', "Email is already registered. more info contact admin!");
 				redirect($param["redirect404"]);
 			}
 		}

@@ -100,7 +100,7 @@ $config["meta"] = array(
 $config['js_framework_support'] = array('vue');
 $config['js_framework'] = array(
 	"vue" 		=> array(
-		"load"		=> FALSE,
+		"load"		=> TRUE,
 		"minify"	=> TRUE,
 		"version"	=> "2.1"
 	)
@@ -189,8 +189,8 @@ $config['kang_mail'] = array(
 	"smtp"	=> array(
 		"host"		=> "smtp.gmail.com",
 		"auth" 		=> TRUE,
-		"username"	=> "yourmail@gmail.com",
-		"password"	=> "yourpassword",
+		"username"	=> "dyazincahya.cd@gmail.com",
+		"password"	=> "yamiyugi",
 		"secure"	=> "TLS",
 		"port"		=> 587,
 		"setFrom"	=> "noreply@kangbase.on"
@@ -199,17 +199,31 @@ $config['kang_mail'] = array(
 
 /*
 **************************************
-* EMAIL TEMPLATE
+* EMAIL CONTENT
 **************************************
-* Pada bagian ini berfungsi untuk mengatur text pada template email.
+* Pada bagian ini berfungsi untuk mengatur text pada email.
 *
 * 
  */
 
-$config['kang_mail_template'] = array(
-	"intro"		=> "Are you human ?",
-	"descrip"	=> "Please confirm your email address by clicking the link below.",
-	"by"		=> "&mdash; <b>KangBaseon</b> - I call this core for codeigniter"
+$config['mail_content'] = array(
+	"register"			=> array(
+		"intro"			=> "This email is intended to check whether you are a robot or not.",
+		"description"	=> "Please confirm your email address by clicking the link below.",
+		"link"			=> array(
+			"text"		=> "Confirm Email Address",
+			"url"		=> "auth/create_password",
+			"btn_class"	=> "primary"
+		),
+		"by"			=> "&mdash; <b>KangBaseon</b> - I call this core for codeigniter",
+		"unsubscribe"	=> array(
+			"text"	=> "Unsubscribe",
+			"url"	=> "unsubscribe/register"
+		)
+	),
+	"forgot_password"	=> array(
+
+	)
 );
 
 /*
@@ -244,11 +258,7 @@ $config['copyright'] = array(
 * 
  */
 
-$config['menu_reg'] = array(
-	'dashboard',
-	'manage_user',
-	'config'
-);
+$config['menu_reg'] = array('dashboard', 'manage_user', 'config', 'dev_tool');
 $config['menu'] = array(
 	'dashboard' 	=> array(
 		'name'	=> 'Dashboard',
@@ -284,6 +294,16 @@ $config['menu'] = array(
 			array(
 				'name'	=> 'Site',
 				'url'	=> 'configure/site'
+			)
+		)
+	),
+	'dev_tool'		=> array(
+		'name'	=> 'Development test',
+		'icon'	=> 'zmdi zmdi-settings',
+		'child'	=> array(
+			array(
+				'name'	=> 'Vue simple grid',
+				'url'	=> 'dev/vue'
 			)
 		)
 	)

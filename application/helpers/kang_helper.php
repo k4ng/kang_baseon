@@ -72,6 +72,14 @@
 		}
 	}
 
+	function kang_hash($param = '123')
+	{
+		$whirlpool = hash('whirlpool', $param, false); 
+        $sha512 = hash('sha512', $whirlpool, false); 
+
+        return $sha512;	
+	}
+
 	/**
 	 * @desc memvalidasi cache
 	 */
